@@ -1,0 +1,19 @@
+# Build directory
+build/
+out/
+bin/
+*.exe
+*.out
+*.a
+*.so
+*.dll
+
+# IDEs
+.vscode/
+.idea/
+*.sln
+*.vcxproj*
+
+# System files
+.DS_Store
+Thumbs.db
