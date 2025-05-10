@@ -17,7 +17,7 @@ public:
     CalculatorGUI();
     ~CalculatorGUI();
 
-    // Delete copy/move operations
+    // Delete copy/move operations for singleton-like behavior
     CalculatorGUI(const CalculatorGUI&) = delete;
     CalculatorGUI(CalculatorGUI&&) = delete;
     CalculatorGUI& operator=(const CalculatorGUI&) = delete;
@@ -48,7 +48,7 @@ private:
     /**
      * @brief Process the button click
      */
-    // void processButtonClick(const std::string& label);
+    void processButtonClick(const std::string& label);
 };
 
 #endif // CALCULATOR_GUI_H

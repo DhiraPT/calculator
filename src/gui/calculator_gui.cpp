@@ -1,7 +1,10 @@
 #include "calculator/calculator_gui.hpp"
 
 #include <array>
+#include <cmath>
+#include <iomanip>
 #include <iostream>
+#include <sstream>
 #include <stdexcept>
 
 #include "glad.h"
@@ -13,9 +16,11 @@
 #include "imgui_impl_opengl3.h"
 #include "imgui_stdlib.h"
 
-static void glfw_error_callback(int error, const char* description) {
+namespace {
+void glfw_error_callback(int error, const char* description) {
     std::cerr << "GLFW Error " << error << ": " << description << '\n';
 }
+} // namespace
 
 CalculatorGUI::CalculatorGUI() : m_calculator_core(std::make_unique<CalculatorCore>()) {}
 
@@ -135,8 +140,8 @@ void CalculatorGUI::render() {
     ImGui::InputText("Display", &m_displayBuffer, ImGuiInputTextFlags_ReadOnly);
 
     // Button layout
-    const std::array<std::array<std::string, 4>, 5> buttons = {
-        {{"7", "8", "9", "/"}, {"4", "5", "6", "*"}, {"1", "2", "3", "-"}, {"0", ".", "=", "+"}, {"C", "", "", ""}}};
+    const std::array<std::array<std::string, 5>, 4> buttons = {
+        {{"7", "8", "9", "/", "^"}, {"4", "5", "6", "*", "("}, {"1", "2", "3", "-", ")"}, {"0", ".", "=", "+", "C"}}};
 
     float available_width = ImGui::GetContentRegionAvail().x;
     float spacing = ImGui::GetStyle().ItemSpacing.x;
@@ -150,7 +155,7 @@ void CalculatorGUI::render() {
             const auto& label = row[i];
             if (!label.empty()) {
                 if (ImGui::Button(label.c_str(), ImVec2(button_width, button_height))) {
-                    // processButtonClick(label);
+                    processButtonClick(label);
                 }
                 if (i < row.size() - 1) {
                     ImGui::SameLine();
@@ -163,17 +168,38 @@ void CalculatorGUI::render() {
     ImGui::End();
 }
 
-// void CalculatorGUI::processButtonClick(const std::string& label) {
-//     if (label == "=") {
-//         try {
-//             // m_displayBuffer =
-//             m_calculator_core->calculate(m_displayBuffer);
-//         } catch (const std::exception& e) {
-//             m_displayBuffer = "Error";
-//         }
-//     } else if (label == "C") {
-//         m_displayBuffer.clear();
-//     } else {
-//         m_displayBuffer += label;
-//     }
-// }
+void CalculatorGUI::processButtonClick(const std::string& label) {
+    if (label == "=") {
+        try {
+            m_result = m_calculator_core->calculate(m_displayBuffer);
+
+            // Format the output
+            std::ostringstream oss;
+            double intpart;
+            if (std::modf(m_result, &intpart) == 0.0) {
+                // Whole number
+                oss << std::setprecision(0) << std::fixed << m_result;
+            } else {
+                // Decimal number - show up to 10 significant digits
+                oss << std::setprecision(10) << m_result;
+                auto str = oss.str();
+                // Trim trailing zeros
+                str.erase(str.find_last_not_of('0') + 1, std::string::npos);
+                if (str.back() == '.')
+                    str.pop_back();
+                m_displayBuffer = str;
+                return;
+            }
+            m_displayBuffer = oss.str();
+        } catch (const std::exception& e) {
+            m_displayBuffer = "Error";
+        }
+    } else if (label == "C") {
+        m_displayBuffer.clear();
+    } else {
+        if (m_displayBuffer == "0") {
+            m_displayBuffer.clear();
+        }
+        m_displayBuffer += label;
+    }
+}

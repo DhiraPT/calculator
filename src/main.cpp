@@ -6,7 +6,7 @@ int main() {
     try {
         CalculatorGUI gui;
         if (!gui.initialize()) {
-            std::cerr << "Failed to initialize GUI" << std::endl;
+            std::cerr << "Failed to initialize GUI\n";
             return 1;
         }
 
@@ -15,7 +15,7 @@ int main() {
 
         return 0;
     } catch (const std::exception& e) {
-        std::cerr << "Error: " << e.what() << std::endl;
+        std::cerr << "Error: " << e.what() << "\n";
         return 1;
     }
 }

@@ -12,6 +12,7 @@ ReferenceAlignment: Left
 
 AllowShortBlocksOnASingleLine: Empty
 AlignAfterOpenBracket: Align
+InsertNewlineAtEOF: true
 
 SortIncludes: true
 IncludeBlocks: Regroup
