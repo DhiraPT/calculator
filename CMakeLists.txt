@@ -1,5 +1,5 @@
-cmake_minimum_required(VERSION 3.15)
-project(Calculator VERSION 1.0 LANGUAGES C CXX)
+cmake_minimum_required(VERSION 3.10)
+project(calculator VERSION 1.0 LANGUAGES C CXX)
 
 set(CMAKE_CXX_STANDARD 17)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
