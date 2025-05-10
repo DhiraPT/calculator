@@ -1,8 +1,9 @@
 #include "calculator/calculator_core.hpp"
+
 #include <gtest/gtest.h>
 
 class CalculatorTest : public ::testing::Test {
-  protected:
+protected:
     CalculatorCore calc;
 };
 
@@ -47,7 +48,7 @@ TEST_F(CalculatorTest, Divide) {
     EXPECT_THROW(calc.divide(1, 0), std::runtime_error);
 }
 
-int main(int argc, char **argv) {
+int main(int argc, char** argv) {
     ::testing::InitGoogleTest(&argc, argv);
     return RUN_ALL_TESTS();
 }

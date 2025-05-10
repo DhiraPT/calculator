@@ -6,7 +6,7 @@
  * @brief Core calculator functionality with basic and advanced math operations
  */
 class CalculatorCore {
-  public:
+public:
     CalculatorCore();
     ~CalculatorCore();
 
@@ -27,7 +27,7 @@ class CalculatorCore {
     // double recallMemory() const;
     // void clearMemory();
 
-  private:
+private:
     double memory;
 };
 

@@ -13,15 +13,15 @@ struct GLFWwindow;
  * @brief GUI wrapper for the Calculator class using ImGui
  */
 class CalculatorGUI {
-  public:
+public:
     CalculatorGUI();
     ~CalculatorGUI();
 
     // Delete copy/move operations
-    CalculatorGUI(const CalculatorGUI &) = delete;
-    CalculatorGUI(CalculatorGUI &&) = delete;
-    CalculatorGUI &operator=(const CalculatorGUI &) = delete;
-    CalculatorGUI &operator=(CalculatorGUI &&) = delete;
+    CalculatorGUI(const CalculatorGUI&) = delete;
+    CalculatorGUI(CalculatorGUI&&) = delete;
+    CalculatorGUI& operator=(const CalculatorGUI&) = delete;
+    CalculatorGUI& operator=(CalculatorGUI&&) = delete;
 
     /**
      * @brief Initialize the GUI
@@ -34,8 +34,8 @@ class CalculatorGUI {
      */
     void run();
 
-  private:
-    GLFWwindow *m_window = nullptr;
+private:
+    GLFWwindow* m_window = nullptr;
     std::unique_ptr<CalculatorCore> m_calculator_core;
     double m_result = 0.0;
     std::string m_displayBuffer = "0";

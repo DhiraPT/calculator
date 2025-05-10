@@ -1,4 +1,5 @@
 #include "calculator/calculator_core.hpp"
+
 #include <stdexcept>
 
 CalculatorCore::CalculatorCore() : memory(0.0) {}

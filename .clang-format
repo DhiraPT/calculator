@@ -4,4 +4,28 @@ ColumnLimit: 120
 IndentWidth: 4
 TabWidth: 4
 UseTab: Never
+AccessModifierOffset: -4
+
+DerivePointerAlignment: false
+PointerAlignment: Left
+ReferenceAlignment: Left
+
+AllowShortBlocksOnASingleLine: Empty
+AlignAfterOpenBracket: Align
+
+SortIncludes: true
+IncludeBlocks: Regroup
+IncludeCategories:
+  - Regex:           '^"calculator/.*"'
+    Priority:        1
+  - Regex:           '^<[^/]+>$'
+    Priority:        2
+  - Regex:           '^"glad.h"$'
+    Priority:        3
+  - Regex:           '^<.*/.*>$'
+    Priority:        4
+  - Regex:           '^"imgui.*"'
+    Priority:        5
+  - Regex:           '.*'
+    Priority:        6
 ---

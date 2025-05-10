@@ -5,13 +5,15 @@
 #include <stdexcept>
 
 #include "glad.h"
+
+#include <GLFW/glfw3.h>
+
 #include "imgui.h"
 #include "imgui_impl_glfw.h"
 #include "imgui_impl_opengl3.h"
 #include "imgui_stdlib.h"
-#include <GLFW/glfw3.h>
 
-static void glfw_error_callback(int error, const char *description) {
+static void glfw_error_callback(int error, const char* description) {
     std::cerr << "GLFW Error " << error << ": " << description << '\n';
 }
 
@@ -71,7 +73,7 @@ bool CalculatorGUI::initialize() {
     // Setup Dear ImGui context
     IMGUI_CHECKVERSION();
     ImGui::CreateContext();
-    ImGuiIO &io = ImGui::GetIO();
+    ImGuiIO& io = ImGui::GetIO();
     io.ConfigFlags |= ImGuiConfigFlags_NavEnableKeyboard; // Enable Keyboard Controls
 
     ImGui::StyleColorsDark();
@@ -142,10 +144,10 @@ void CalculatorGUI::render() {
     float button_width = (available_width - (columns - 1) * spacing) / columns;
     float button_height = 50.0f;
 
-    for (const auto &row : buttons) {
+    for (const auto& row : buttons) {
         ImGui::BeginGroup();
         for (size_t i = 0; i < row.size(); i++) {
-            const auto &label = row[i];
+            const auto& label = row[i];
             if (!label.empty()) {
                 if (ImGui::Button(label.c_str(), ImVec2(button_width, button_height))) {
                     // processButtonClick(label);
